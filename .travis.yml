@@ -5,6 +5,11 @@ jdk: oraclejdk8
 services:
   - docker
 
+  # Cache the .m2 folder to prevent redownloading dependencies on each build
+cache:
+  directories:
+  - "$HOME/.m2/repository"
+
 before_install:
   - sudo service mysql stop
   - docker pull takimatraining/devops-training-db
@@ -13,3 +18,5 @@ before_install:
   # Run Unit Test and Integration Tests
 script:
   - mvn verify
+
+
